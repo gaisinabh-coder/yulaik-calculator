@@ -2,23 +2,23 @@ export const START_SECTIONS = [
   {
     id: 'collections',
     imageKey: 'kit',
-    name: 'Просмотр готовых коллекций',
+    name: 'Готовые коллекции',
     description:
-      'Посмотреть идеи комплектов и готовые направления для секций, команд, мероприятий и выездов.',
+      'Посмотреть лимитированные коллекции для маркетов, городских событий и подарочного мерча.',
   },
   {
     id: 'custom_order',
     imageKey: 'single',
-    name: 'Расчёт стоимости индивидуального заказа',
+    name: 'Индивидуальный заказ',
     description:
-      'Рассчитать один вид изделий или печать на вещах заказчика.',
+      'Рассчитать один вид изделий или нанесение на ваших вещах.',
   },
   {
     id: 'team_kit',
     imageKey: 'travel',
-    name: 'Расчёт стоимости комплекта для команд',
+    name: 'Комплекты для команд',
     description:
-      'Рассчитать комплект для секции, команды, коллектива, мероприятия или выезда.',
+      'Собрать комплект для секции, студии, команды, коллектива или выезда.',
   },
 ] as const;
 
@@ -27,14 +27,14 @@ export const PRINT_METHODS = [
     id: 'print',
     name: 'Печать',
     description:
-      'Базовое нанесение логотипа, бренда, имени, номера или принта.',
+      'Базовое нанесение логотипа, имени, номера, надписи или авторского принта.',
     extraPricePerPrintedItem: 0,
   },
   {
     id: 'embroidery',
     name: 'Вышивка',
     description:
-      'Более статусное нанесение. Подходит для худи, толстовок, шоперов, сумок и подарочных изделий.',
+      'Более статусное нанесение для худи, толстовок, шоперов, сумок и подарочных изделий.',
     extraPricePerPrintedItem: 350,
   },
 ] as const;
@@ -45,44 +45,70 @@ export const READY_COLLECTIONS = [
     imageKey: 'eventMember',
     name: 'Вкусы Оренбуржья',
     description:
-      'Готовая коллекция для гастромаркетов, городских событий и сувенирного мерча с локальным характером.',
+      'Лимитированная коллекция для гастромаркетов, городских событий и сувениров с локальным характером.',
     priceLabel: 'готовые изделия по наличию',
     products: [
       {
-        id: 'tastes_tshirt',
+        id: 'tastes_tshirt_01',
         imageKey: 'tshirt',
-        name: 'Футболка',
-        description: 'Футболка с авторским принтом коллекции',
+        type: 'Футболка',
+        variant: 'Вкусы Оренбуржья',
+        name: 'Футболка «Вкусы Оренбуржья»',
+        description:
+          'Футболка с авторским принтом из коллекции «Вкусы Оренбуржья».',
+        price: 1490,
       },
       {
-        id: 'tastes_shopper',
+        id: 'tastes_shopper_01',
         imageKey: 'shopper',
-        name: 'Шопер',
-        description: 'Шопер с принтом коллекции',
+        imageUrl: '/catalog/tastes-shopper-01.jpg',
+        type: 'Шопер',
+        variant: 'Вкусы Оренбуржья',
+        name: 'Шопер «Вкусы Оренбуржья»',
+        description:
+          'Плотный шопер с принтом коллекции. Удобен для маркета, прогулки и подарочного набора.',
+        price: 690,
       },
       {
-        id: 'tastes_bandana',
+        id: 'tastes_bandana_01',
         imageKey: 'drawstringBag',
-        name: 'Бандана',
-        description: 'Бандана с графикой коллекции',
+        type: 'Бандана',
+        variant: 'Вкусы Оренбуржья',
+        name: 'Бандана «Вкусы Оренбуржья»',
+        description:
+          'Бандана с графикой коллекции — акцентный аксессуар для образа или команды.',
+        price: 490,
       },
       {
-        id: 'tastes_bottle_case',
+        id: 'tastes_bottle_case_01',
         imageKey: 'accessoryLogo',
-        name: 'Чехол для бутылки',
-        description: 'Текстильный чехол с принтом',
+        imageUrl: '/catalog/tastes-bottle-01.jpg',
+        type: 'Чехол для бутылки',
+        variant: 'Вкусы Оренбуржья',
+        name: 'Чехол для бутылки «Вкусы Оренбуржья»',
+        description:
+          'Текстильный чехол для бутылки с принтом. Лёгкий сувенирный аксессуар для событий и прогулок.',
+        price: 590,
       },
       {
-        id: 'tastes_cupholder',
+        id: 'tastes_cupholder_01',
         imageKey: 'crossbody',
-        name: 'Капхолдер',
-        description: 'Аксессуар для стакана с принтом',
+        type: 'Капхолдер',
+        variant: 'Вкусы Оренбуржья',
+        name: 'Капхолдер «Вкусы Оренбуржья»',
+        description:
+          'Аксессуар для стакана с принтом коллекции. Удобен для фестивалей, кофе и прогулок.',
+        price: 440,
       },
       {
-        id: 'tastes_keychain',
+        id: 'tastes_keychain_01',
         imageKey: 'accessoryLogo',
-        name: 'Брелок / тег',
-        description: 'Небольшой сувенирный аксессуар',
+        type: 'Брелок / тег',
+        variant: 'Вкусы Оренбуржья',
+        name: 'Брелок / тег «Вкусы Оренбуржья»',
+        description:
+          'Небольшой сувенирный аксессуар с графикой коллекции.',
+        price: 190,
       },
     ],
   },
@@ -91,44 +117,68 @@ export const READY_COLLECTIONS = [
     imageKey: 'kit',
     name: 'Оренбуржье',
     description:
-      'Коллекция с визуальными образами Оренбуржья: степь, городские смыслы, локальные символы и авторские принты.',
+      'Коллекция с образами Оренбуржья: степь, городские смыслы, локальные символы и авторские принты.',
     priceLabel: 'готовые изделия по наличию',
     products: [
       {
-        id: 'orenburzhye_tshirt',
+        id: 'orenburzhye_tshirt_01',
         imageKey: 'tshirt',
-        name: 'Футболка',
-        description: 'Футболка с авторским принтом коллекции',
+        type: 'Футболка',
+        variant: 'Оренбуржье',
+        name: 'Футболка «Оренбуржье»',
+        description:
+          'Футболка с авторским принтом о степи, городе и локальной идентичности.',
+        price: 1490,
       },
       {
-        id: 'orenburzhye_shopper',
+        id: 'orenburzhye_shopper_01',
         imageKey: 'shopper',
-        name: 'Шопер',
-        description: 'Шопер с локальным принтом',
+        type: 'Шопер',
+        variant: 'Оренбуржье',
+        name: 'Шопер «Оренбуржье»',
+        description:
+          'Шопер с локальным принтом. Подходит для подарка, маркета и повседневного использования.',
+        price: 690,
       },
       {
-        id: 'orenburzhye_bandana',
+        id: 'orenburzhye_bandana_01',
         imageKey: 'drawstringBag',
-        name: 'Бандана',
-        description: 'Бандана с графикой коллекции',
+        type: 'Бандана',
+        variant: 'Оренбуржье',
+        name: 'Бандана «Оренбуржье»',
+        description:
+          'Бандана с графикой коллекции «Оренбуржье». Можно использовать как аксессуар или элемент образа.',
+        price: 490,
       },
       {
-        id: 'orenburzhye_headband',
+        id: 'orenburzhye_headband_01',
         imageKey: 'accessoryLogo',
-        name: 'Повязка',
-        description: 'Повязка с авторским принтом',
+        type: 'Повязка',
+        variant: 'Оренбуржье',
+        name: 'Повязка «Оренбуржье»',
+        description:
+          'Повязка с авторским принтом для прогулок, тренировок, танцев и городских событий.',
+        price: 390,
       },
       {
-        id: 'orenburzhye_bottle_case',
+        id: 'orenburzhye_bottle_case_01',
         imageKey: 'accessoryLogo',
-        name: 'Чехол для бутылки',
-        description: 'Чехол с визуалом коллекции',
+        type: 'Чехол для бутылки',
+        variant: 'Оренбуржье',
+        name: 'Чехол для бутылки «Оренбуржье»',
+        description:
+          'Чехол с визуалом коллекции. Практичный аксессуар с локальным характером.',
+        price: 590,
       },
       {
-        id: 'orenburzhye_keychain',
+        id: 'orenburzhye_keychain_01',
         imageKey: 'accessoryLogo',
-        name: 'Брелок / тег',
-        description: 'Небольшой сувенирный аксессуар',
+        type: 'Брелок / тег',
+        variant: 'Оренбуржье',
+        name: 'Брелок / тег «Оренбуржье»',
+        description:
+          'Компактный сувенирный аксессуар с символикой коллекции.',
+        price: 190,
       },
     ],
   },
@@ -139,7 +189,7 @@ export const TEAM_KITS = [
     id: 'section_member',
     imageKey: 'sectionMember',
     name: 'Участник секции',
-    description: 'Для секций, студий и кружков',
+    description: 'Базовый комплект для секций, студий и кружков.',
     direction: 'Секции, студии, кружки',
     price: 1790,
     printedItemsCount: 2,
@@ -157,7 +207,8 @@ export const TEAM_KITS = [
     id: 'event_member',
     imageKey: 'eventMember',
     name: 'Участник мероприятия',
-    description: 'Для организаторов событий, фестивалей, конкурсов и сборов',
+    description:
+      'Комплект для фестивалей, конкурсов, сборов, мастер-классов и городских событий.',
     direction: 'Организаторы событий',
     price: 1790,
     printedItemsCount: 2,
@@ -175,7 +226,8 @@ export const TEAM_KITS = [
     id: 'team',
     imageKey: 'team',
     name: 'Команда',
-    description: 'Для команды, студии или коллектива, которым нужен единый стиль',
+    description:
+      'Комплект для команды, студии или коллектива, которым нужен единый визуальный стиль.',
     direction: 'Команды, студии, коллективы',
     price: 4290,
     printedItemsCount: 2,
@@ -197,7 +249,8 @@ export const TEAM_KITS = [
     id: 'travel',
     imageKey: 'travel',
     name: 'Выезд',
-    description: 'Для соревнований, выступлений, конкурсов и поездок',
+    description:
+      'Расширенный комплект для соревнований, выступлений, конкурсов и поездок.',
     direction: 'Соревнования, выступления, поездки',
     price: 6290,
     printedItemsCount: 3,
@@ -226,7 +279,8 @@ export const INDIVIDUAL_PRODUCTS = [
     name: 'Футболка / топ',
     price: 1090,
     printedItemsCount: 1,
-    description: 'Изделие + логотип / бренд',
+    description:
+      'Готовое изделие ЮлайК с нанесением логотипа, названия, имени или принта.',
   },
   {
     id: 'hoodie',
@@ -234,7 +288,8 @@ export const INDIVIDUAL_PRODUCTS = [
     name: 'Худи / толстовка / свитшот',
     price: 3290,
     printedItemsCount: 1,
-    description: 'Изделие + логотип / бренд',
+    description:
+      'Тёплое изделие с нанесением для команды, студии, формы или подарка.',
   },
   {
     id: 'bag',
@@ -242,7 +297,8 @@ export const INDIVIDUAL_PRODUCTS = [
     name: 'Мешок для обуви / формы',
     price: 690,
     printedItemsCount: 1,
-    description: 'Изделие + логотип / бренд',
+    description:
+      'Мешок с логотипом или именем для тренировок, выступлений и сборов.',
   },
   {
     id: 'shopper',
@@ -250,7 +306,8 @@ export const INDIVIDUAL_PRODUCTS = [
     name: 'Шопер',
     price: 690,
     printedItemsCount: 1,
-    description: 'Изделие + логотип / бренд',
+    description:
+      'Шопер с логотипом, принтом или фирменной графикой.',
   },
   {
     id: 'crossbody',
@@ -258,7 +315,8 @@ export const INDIVIDUAL_PRODUCTS = [
     name: 'Сумка через плечо / поясная сумка',
     price: 990,
     printedItemsCount: 1,
-    description: 'Изделие + логотип / бренд',
+    description:
+      'Сумка с нанесением для команды, выезда, мероприятия или подарочного комплекта.',
   },
   {
     id: 'backpack',
@@ -266,7 +324,8 @@ export const INDIVIDUAL_PRODUCTS = [
     name: 'Рюкзак',
     price: 1990,
     printedItemsCount: 1,
-    description: 'Изделие + логотип / бренд',
+    description:
+      'Рюкзак с логотипом, именем или символикой команды.',
   },
 ] as const;
 
@@ -275,28 +334,32 @@ export const CUSTOMER_PRINT_ZONES = [
     id: 'chest_logo',
     imageKey: 'chestLogo',
     name: 'Логотип на груди',
-    description: 'Небольшой логотип спереди',
+    description:
+      'Небольшой логотип, знак команды, студии или бренда спереди.',
     price: 290,
   },
   {
     id: 'front_print',
     imageKey: 'frontPrint',
     name: 'Принт спереди',
-    description: 'Основной принт на передней части изделия',
+    description:
+      'Основной принт, надпись или изображение на передней части изделия.',
     price: 490,
   },
   {
     id: 'back_print',
     imageKey: 'backPrint',
     name: 'Принт на спине',
-    description: 'Крупная надпись, номер, слоган или принт',
+    description:
+      'Крупный принт, номер, фамилия, слоган или надпись на спине.',
     price: 690,
   },
   {
     id: 'accessory_logo',
     imageKey: 'accessoryLogo',
     name: 'Логотип на аксессуаре',
-    description: 'Мешок, шопер, сумка или рюкзак',
+    description:
+      'Нанесение на мешок, шопер, сумку, рюкзак или другой аксессуар.',
     price: 390,
   },
 ] as const;
