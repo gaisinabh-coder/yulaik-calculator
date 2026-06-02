@@ -1,4 +1,4 @@
-import { type ReactNode, useMemo, useState } from 'react';
+import { type CSSProperties, type ReactNode, useMemo, useState } from 'react';
 import {
   Box,
   Button,
@@ -39,25 +39,25 @@ type CustomOrderType = 'product' | 'customer_print';
 
 const formatPrice = (value: number) => `${value.toLocaleString('ru-RU')} ₽`;
 
-const cardStyle = (isSelected: boolean) => ({
+const cardStyle = (isSelected: boolean): CSSProperties => ({
   padding: 14,
   cursor: 'pointer',
   border: isSelected ? '2px solid #2688EB' : '2px solid transparent',
 });
 
-const sectionNoteStyle = {
+const sectionNoteStyle: CSSProperties = {
   marginTop: 8,
   color: '#6D7885',
 };
 
-const rowStyle = {
+const rowStyle: CSSProperties = {
   display: 'flex',
   gap: 12,
   overflowX: 'auto',
   paddingBottom: 8,
 };
 
-const smallCardStyle = (isSelected: boolean) => ({
+const smallCardStyle = (isSelected: boolean): CSSProperties => ({
   ...cardStyle(isSelected),
   minWidth: 220,
   flex: '0 0 220px',
@@ -72,37 +72,41 @@ export const App = () => {
   const [customOrderType, setCustomOrderType] =
     useState<CustomOrderType>('product');
 
-  const [printMethodId, setPrintMethodId] = useState(PRINT_METHODS[0].id);
+  const [printMethodId, setPrintMethodId] = useState<string>(
+    PRINT_METHODS[0].id,
+  );
 
-  const [selectedCollectionId, setSelectedCollectionId] = useState('');
+  const [selectedCollectionId, setSelectedCollectionId] = useState<string>('');
   const [selectedCollectionProductIds, setSelectedCollectionProductIds] =
     useState<string[]>([]);
 
-  const [selectedTeamKitId, setSelectedTeamKitId] = useState(TEAM_KITS[0].id);
-  const [selectedProductId, setSelectedProductId] = useState(
+  const [selectedTeamKitId, setSelectedTeamKitId] = useState<string>(
+    TEAM_KITS[0].id,
+  );
+  const [selectedProductId, setSelectedProductId] = useState<string>(
     INDIVIDUAL_PRODUCTS[0].id,
   );
 
-  const [selectedUpper, setSelectedUpper] = useState('');
-  const [selectedSecondUpper, setSelectedSecondUpper] = useState('');
-  const [selectedAccessory, setSelectedAccessory] = useState('');
+  const [selectedUpper, setSelectedUpper] = useState<string>('');
+  const [selectedSecondUpper, setSelectedSecondUpper] = useState<string>('');
+  const [selectedAccessory, setSelectedAccessory] = useState<string>('');
 
-  const [customerItemType, setCustomerItemType] = useState(
+  const [customerItemType, setCustomerItemType] = useState<string>(
     CUSTOMER_ITEM_TYPES[0],
   );
   const [selectedPrintZoneIds, setSelectedPrintZoneIds] = useState<string[]>([
     CUSTOMER_PRINT_ZONES[0].id,
   ]);
 
-  const [quantityInput, setQuantityInput] = useState('5');
-  const [personalizationId, setPersonalizationId] = useState('none');
+  const [quantityInput, setQuantityInput] = useState<string>('5');
+  const [personalizationId, setPersonalizationId] = useState<string>('none');
 
-  const [name, setName] = useState('');
-  const [phone, setPhone] = useState('');
-  const [teamName, setTeamName] = useState('');
-  const [comment, setComment] = useState('');
-  const [isSent, setIsSent] = useState(false);
-  const [isSending, setIsSending] = useState(false);
+  const [name, setName] = useState<string>('');
+  const [phone, setPhone] = useState<string>('');
+  const [teamName, setTeamName] = useState<string>('');
+  const [comment, setComment] = useState<string>('');
+  const [isSent, setIsSent] = useState<boolean>(false);
+  const [isSending, setIsSending] = useState<boolean>(false);
 
   const quantity = useMemo(() => {
     const parsedQuantity = Number(quantityInput);
@@ -167,6 +171,21 @@ export const App = () => {
         selectedPrintZoneIds.includes(zone.id),
       ),
     [selectedPrintZoneIds],
+  );
+
+  const upperOptions = useMemo(
+    () => [...selectedTeamKit.upperOptions],
+    [selectedTeamKit],
+  );
+
+  const secondUpperOptions = useMemo(
+    () => [...selectedTeamKit.secondUpperOptions],
+    [selectedTeamKit],
+  );
+
+  const accessoryOptions = useMemo(
+    () => [...selectedTeamKit.accessoryOptions],
+    [selectedTeamKit],
   );
 
   const teamKitCalculation = calculateBaseTotal({
@@ -273,10 +292,14 @@ export const App = () => {
   function handleTeamKitSelect(kitId: string) {
     const kit = TEAM_KITS.find((item) => item.id === kitId) || TEAM_KITS[0];
 
+    const nextUpperOptions = [...kit.upperOptions];
+    const nextSecondUpperOptions = [...kit.secondUpperOptions];
+    const nextAccessoryOptions = [...kit.accessoryOptions];
+
     setSelectedTeamKitId(kit.id);
-    setSelectedUpper(kit.upperOptions[0] || '');
-    setSelectedSecondUpper(kit.secondUpperOptions[0] || '');
-    setSelectedAccessory(kit.accessoryOptions[0] || '');
+    setSelectedUpper(nextUpperOptions[0] || '');
+    setSelectedSecondUpper(nextSecondUpperOptions[0] || '');
+    setSelectedAccessory(nextAccessoryOptions[0] || '');
     setIsSent(false);
   }
 
@@ -618,12 +641,10 @@ export const App = () => {
                 <FormItem top="Тип изделия заказчика">
                   <Select
                     value={customerItemType}
-                    onChange={(event) =>
-                      setCustomerItemType(
-                        event.target
-                          .value as (typeof CUSTOMER_ITEM_TYPES)[number],
-                      )
-                    }
+                    onChange={(event) => {
+                      setCustomerItemType(event.target.value);
+                      setIsSent(false);
+                    }}
                     options={CUSTOMER_ITEM_TYPES.map((item) => ({
                       label: item,
                       value: item,
@@ -716,15 +737,15 @@ export const App = () => {
           </Group>
 
           <Group header={<Header>4. Уточните состав</Header>}>
-            {selectedTeamKit.upperOptions.length > 0 && (
+            {upperOptions.length > 0 && (
               <FormItem top="Верх 1">
                 <Select
-                  value={selectedUpper || selectedTeamKit.upperOptions[0]}
+                  value={selectedUpper || upperOptions[0] || ''}
                   onChange={(event) => {
                     setSelectedUpper(event.target.value);
                     setIsSent(false);
                   }}
-                  options={selectedTeamKit.upperOptions.map((item) => ({
+                  options={upperOptions.map((item) => ({
                     label: item,
                     value: item,
                   }))}
@@ -732,18 +753,15 @@ export const App = () => {
               </FormItem>
             )}
 
-            {selectedTeamKit.secondUpperOptions.length > 0 && (
+            {secondUpperOptions.length > 0 && (
               <FormItem top="Верх 2">
                 <Select
-                  value={
-                    selectedSecondUpper ||
-                    selectedTeamKit.secondUpperOptions[0]
-                  }
+                  value={selectedSecondUpper || secondUpperOptions[0] || ''}
                   onChange={(event) => {
                     setSelectedSecondUpper(event.target.value);
                     setIsSent(false);
                   }}
-                  options={selectedTeamKit.secondUpperOptions.map((item) => ({
+                  options={secondUpperOptions.map((item) => ({
                     label: item,
                     value: item,
                   }))}
@@ -751,17 +769,15 @@ export const App = () => {
               </FormItem>
             )}
 
-            {selectedTeamKit.accessoryOptions.length > 0 && (
+            {accessoryOptions.length > 0 && (
               <FormItem top="Дополнение">
                 <Select
-                  value={
-                    selectedAccessory || selectedTeamKit.accessoryOptions[0]
-                  }
+                  value={selectedAccessory || accessoryOptions[0] || ''}
                   onChange={(event) => {
                     setSelectedAccessory(event.target.value);
                     setIsSent(false);
                   }}
-                  options={selectedTeamKit.accessoryOptions.map((item) => ({
+                  options={accessoryOptions.map((item) => ({
                     label: item,
                     value: item,
                   }))}
